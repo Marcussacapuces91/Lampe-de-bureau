@@ -2,15 +2,21 @@ module doubleAxe(l = 600) {
     color("brown") for (x=[-12,12]) translate([x,0,0]) rotate([0,15,0]) translate([0,0,l/2+20]) cube([12,34,l], center=true);
 }
     
-module pied(ep = 40) {
+module pied(ep = 50) {
     difference() {
+// Cylindre
         translate([50,0,ep/2]) cylinder(d=150, h=ep, $fn=100, center=true);
-        for (x=[-10,10]) translate([x,0,0]) rotate([0,15,0]) translate([0,0,ep/2]) cube([8.5,30,ep+10], center=true);
-        for (a=[-15,15]) rotate([0,0,a]) translate([80,0,4]) cube([100,30,8.5], center=true);
-        for (a=[-15,15]) translate([-300,0,0]) rotate([0,0,a]) translate([350,0,ep/2]) cube([200,75,ep+1], center=true);
+// Abaissement face avant dessus
+        translate([100/2+40,0,40]) cube([100,150,50],center=true);
+// Passage barres
+        for (x=[-12,12]) translate([x,0,0]) rotate([0,15,0]) translate([0,0,ep/2+5]) cube([12.5,34.5,ep+20], center=true);
+// Passage pieds bois
+        for (a=[-15,15]) rotate([0,0,a]) translate([80,0,6]) cube([100,34.5,12.5+.5], center=true);
+// Côté
+        for (a=[-15,15]) translate([-250,0,0]) rotate([0,0,a]) translate([300,0,ep/2]) cube([200,75,ep+1], center=true);
     }
     
-    color("brown") for (a=[-15,15]) rotate([0,0,a]) translate([180,0,4]) cube([300,30,8], center=true);
+    *color("brown") for (a=[-15,15]) rotate([0,0,a]) translate([180,0,6]) cube([300,34,12], center=true);
 }
 
 module support() {
@@ -78,5 +84,6 @@ translate([132.5,0,495]) {
 }
 */
 
-*doubleAxe(500);
-/* translate([132.5,0,495]) rotate([0,15,0])*/ support();
+pied();
+// doubleAxe(500);
+// translate([132.5,0,495]) rotate([0,15,0]) support();
